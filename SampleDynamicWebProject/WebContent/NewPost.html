@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="/controller/PostServe" method="post" onsubmit="return validate();">
+
+		<label>Create New Post</label>
+		<textarea name="posttext" id="posttext" maxlength="141"></textarea>
+		<div id="textarea_feedback"></div>
+
+		<input type="submit" value="Submit" id="submit" /> <input type="reset"
+			value="Clear" />
+	</form>
+
+	<script>
+		function validate() {
+			valid = true;
+
+			if ($('#posttext').val().length == 0) {
+				valid = false;
+				alert('Cannot submit empty post');
+			}
+
+			return valid;
+		}
+	</script>
+</body>
+<script>
+	$(document).ready(	
+			function() {
+				var text_max = 141;
+				$("#textarea_feedback")
+						.html(text_max + ' characters remaining');
+				$("#posttext").keyUp(
+						function() {
+							var char_remaining = text_max
+									- $("#posttext").val().length;
+							$("#textarea_feedback").html(
+									char_remaining + ' characters remaining');
+						});
+			});
+</script>
+</html>
